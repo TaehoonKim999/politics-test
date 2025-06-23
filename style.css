@@ -1,0 +1,451 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    width: 90%;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    min-height: 600px;
+}
+
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 40px 30px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+header p {
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+.page {
+    display: none;
+    padding: 40px 30px;
+}
+
+.page.active {
+    display: block;
+}
+
+.intro {
+    text-align: center;
+}
+
+.intro h2 {
+    color: #667eea;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.intro p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.intro ul {
+    text-align: left;
+    max-width: 400px;
+    margin: 30px auto;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+}
+
+.intro li {
+    margin-bottom: 10px;
+    color: #666;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.1em;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.btn-secondary {
+    background: #f8f9fa;
+    color: #667eea;
+    border: 2px solid #667eea;
+    padding: 15px 40px;
+    font-size: 1.1em;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+.btn-secondary:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.progress-bar {
+    background: #e9ecef;
+    height: 8px;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.progress {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+    width: 0%;
+}
+
+.question-counter {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.2em;
+    color: #667eea;
+    font-weight: 600;
+}
+
+.question-container {
+    text-align: center;
+}
+
+.question-container h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    color: #333;
+}
+
+.question-details {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    border-left: 4px solid #667eea;
+}
+
+.question-details p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #555;
+    font-size: 1.05em;
+}
+
+.question-example {
+    background: rgba(102, 126, 234, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.question-example strong {
+    color: #667eea;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.question-example p {
+    margin-bottom: 0;
+    font-style: italic;
+    color: #666;
+}
+
+.answers {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 40px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.answer-option {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.answer-option:hover {
+    background: #e9ecef;
+    transform: translateY(-1px);
+}
+
+.answer-option input[type="radio"] {
+    margin-right: 15px;
+    transform: scale(1.2);
+}
+
+.answer-option input[type="radio"]:checked + span {
+    color: #667eea;
+    font-weight: 600;
+}
+
+.answer-option:has(input[type="radio"]:checked) {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border-color: #667eea;
+}
+
+.result-container {
+    text-align: center;
+}
+
+.result-container h2 {
+    color: #667eea;
+    margin-bottom: 30px;
+    font-size: 2.2em;
+}
+
+.result-chart {
+    margin: 40px 0;
+}
+
+.spectrum {
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.spectrum-bar {
+    position: relative;
+    background: linear-gradient(to right, #007bff 0%, #6c757d 50%, #dc3545 100%);
+    height: 60px;
+    border-radius: 30px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.spectrum-labels {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 14px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.spectrum-labels span:first-child {
+    color: white;
+    margin-left: 15px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.spectrum-labels span:nth-child(2) {
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.spectrum-labels span:last-child {
+    color: white;
+    margin-right: 15px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.spectrum-indicator {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    transition: left 0.5s ease;
+    z-index: 3;
+}
+
+.result-details {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 15px;
+    margin: 30px 0;
+    text-align: left;
+}
+
+.result-details h3 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.result-details h3.very-progressive,
+.result-details h3.progressive,
+.result-details h3.center-left {
+    color: #007bff; /* 진보 계열 - 파란색 */
+}
+
+.result-details h3.center {
+    color: #6c757d; /* 중도 - 회색 */
+}
+
+.result-details h3.center-right,
+.result-details h3.conservative,
+.result-details h3.very-conservative {
+    color: #dc3545; /* 보수 계열 - 빨간색 */
+}
+
+.result-details p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.result-breakdown h4 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+.breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.breakdown-item:last-child {
+    border-bottom: none;
+}
+
+.breakdown-item span:first-child {
+    font-weight: 600;
+    color: #555;
+}
+
+.breakdown-item span:last-child {
+    font-weight: 600;
+}
+
+.breakdown-item span.very-progressive,
+.breakdown-item span.progressive,
+.breakdown-item span.center-left {
+    color: #007bff; /* 진보 계열 - 파란색 */
+}
+
+.breakdown-item span.center {
+    color: #6c757d; /* 중도 - 회색 */
+}
+
+.breakdown-item span.center-right,
+.breakdown-item span.conservative,
+.breakdown-item span.very-conservative {
+    color: #dc3545; /* 보수 계열 - 빨간색 */
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        margin: 20px auto;
+    }
+    
+    header {
+        padding: 30px 20px;
+    }
+    
+    header h1 {
+        font-size: 2em;
+    }
+    
+    .page {
+        padding: 30px 20px;
+    }
+    
+    .question-container h2 {
+        font-size: 1.3em;
+    }
+    
+    .question-details {
+        padding: 15px;
+        text-align: left;
+    }
+    
+    .question-details p {
+        font-size: 1em;
+    }
+    
+    .question-example {
+        padding: 12px;
+    }
+    
+    .answers {
+        gap: 12px;
+    }
+    
+    .answer-option {
+        padding: 12px 15px;
+    }
+    
+    .result-details {
+        padding: 20px;
+    }
+    
+    .spectrum-labels {
+        font-size: 0.8em;
+    }
+    
+    .spectrum-labels span:first-child {
+        margin-left: 10px;
+    }
+    
+    .spectrum-labels span:last-child {
+        margin-right: 10px;
+    }
+}
