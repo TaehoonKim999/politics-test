@@ -9,6 +9,14 @@ class PoliticalCompass {
     init() {
         this.bindEvents();
         this.showStartPage();
+        
+        // 페이지 로드 이벤트 추적
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'page_view', {
+                page_title: '정치적 성향 측정 테스트',
+                page_location: window.location.href
+            });
+        }
     }
 
     bindEvents() {
@@ -42,6 +50,15 @@ class PoliticalCompass {
         this.answers = [];
         this.showPage('question-page');
         this.displayQuestion();
+        
+        // 테스트 시작 이벤트 추적
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'test_started', {
+                event_category: 'engagement',
+                event_label: 'political_test',
+                custom_parameter_1: 'test_started'
+            });
+        }
     }
 
     showPage(pageId) {
@@ -88,6 +105,17 @@ class PoliticalCompass {
         } else {
             nextBtn.textContent = '다음 질문';
         }
+
+        // 질문 표시 이벤트 추적
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'question_view', {
+                event_category: 'engagement',
+                question_number: this.currentQuestion + 1,
+                question_id: question.id,
+                question_category: question.category,
+                question_type: question.type
+            });
+        }
     }
 
     nextQuestion() {
@@ -96,12 +124,26 @@ class PoliticalCompass {
         if (!selectedAnswer) return;
 
         const currentQuestionData = this.shuffledQuestions[this.currentQuestion];
+        const answerValue = parseInt(selectedAnswer.value);
+        
         this.answers.push({
             questionId: currentQuestionData.id,
-            value: parseInt(selectedAnswer.value),
+            value: answerValue,
             category: currentQuestionData.category,
             type: currentQuestionData.type
         });
+
+        // 질문 답변 이벤트 추적
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'question_answered', {
+                event_category: 'engagement',
+                question_number: this.currentQuestion + 1,
+                question_id: currentQuestionData.id,
+                answer_value: answerValue,
+                question_category: currentQuestionData.category,
+                question_type: currentQuestionData.type
+            });
+        }
 
         this.currentQuestion++;
 
@@ -214,6 +256,26 @@ class PoliticalCompass {
                 indicator.style.transform = 'translateY(-50%) scale(1)';
             }, 300);
         }, 500);
+
+        // 테스트 완료 이벤트 추적
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'test_completed', {
+                event_category: 'engagement',
+                overall_score: parseFloat(scores.overall.toFixed(2)),
+                result_category: resultCategory.key,
+                economic_score: parseFloat(scores.categories.economic.average.toFixed(2)),
+                social_score: parseFloat(scores.categories.social.average.toFixed(2)),
+                political_score: parseFloat(scores.categories.political.average.toFixed(2)),
+                total_questions: this.shuffledQuestions.length
+            });
+
+            // 맞춤 전환 이벤트 (완료율 추적용)
+            gtag('event', 'conversion', {
+                send_to: 'G-41S36LKM2L',
+                event_category: 'goal_completion',
+                event_label: 'political_test_completion'
+            });
+        }
     }
 
     restart() {
@@ -226,6 +288,14 @@ class PoliticalCompass {
         const indicator = document.getElementById('result-indicator');
         indicator.style.opacity = '0';
         indicator.style.left = '0%';
+
+        // 재시작 이벤트 추적
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'test_restart', {
+                event_category: 'engagement',
+                event_label: 'political_test'
+            });
+        }
     }
 }
 
